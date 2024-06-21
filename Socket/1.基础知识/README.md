@@ -31,3 +31,7 @@
   * dst: 传出参数，小端点分十进制ip地址
   * size: 修饰dst参数，标记dst指向的内存中最多可以存储多少个字节
   * 成功返回第三个参数对应的内存地址，失败NULL
+
+## 通信流程
+
+[![f74602e1d3f9221982fee7ed0c69ffd.png](https://i.postimg.cc/cJZY72hH/f74602e1d3f9221982fee7ed0c69ffd.png)](https://postimg.cc/hXyfcCHW)
