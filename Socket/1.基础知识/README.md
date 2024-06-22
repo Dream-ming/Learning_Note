@@ -1,5 +1,7 @@
 # 套接字通信基础知识
 
+这里的笔记是Linux的套接字用法，window有些许不同
+
 ## 字节序
 
 字节序分为大端(网络字节序)和小端(主机字节序)
@@ -102,5 +104,40 @@
         * sizeof(struct addr);
     * 连接成功返回0，失败返回-1
  
-## read 和 recv
+## recv 和 send
+* #include <sys/types.h>
+* #include <sys/socket.h>
+* ssize_t recv(int sockfd, void *buf, size_t size, int flags);
+   * 如果连接没有断开，接收端没有收到数据，函数就会阻塞等待数据
+   * 第一个参数 socket
+      * 通信的文件描述符，accept()函数的返回值
+   * 第二个参数 *buf
+      * 指向一块有效内存，用于存储接受的数据
+   * 第三个参数 size
+      * 参数buf指向的内存的容量
+   * 第四个参数 flags
+      * 特殊的属性，一般不使用，指定为0
+   * 返回值，大于0实际接受的字节数，等于0对方断开了连接，等于-1接受数据失败
+* ssize_t send(int fd, const void *buf, size_t len, int flags);
+   * 发送数据的函数
+   * 第一个参数 fd
+      * 通信的文件描述符，accept()函数的返回值
+   * 第二个参数 *buf
+      * 传入参数，要发送的字符串
+   * 第三个参数 len
+      * 传入参数，要发送的字符串的长度
+   * 第四个参数 flags
+      * 特殊的属性，一般不使用，指定为0
+   * 返回值，大于0实际发送的字节数，等于-1发送数据失败
 
+## read 和 write
+* #include <unistd.h>
+* ssize_t read(int sockfd, void *buf, size_t size);
+   * 接受数据函数，用法同recv，在不同的头文件下，不需要第四个参数
+* ssize_t write(int fd, const void *buf, size_t, len);
+   * 发送数据函数，用法同send，在不同的头文件下，不需要第四个参数
+
+## close
+* #include <unistd.h>
+* int close(int fd);
+   * 关闭套接字fd
