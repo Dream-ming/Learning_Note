@@ -18,7 +18,7 @@ int main()
     struct sockaddr_in saddr;
     saddr.sin_family = AF_INET;
     saddr.sin_port = htons(9999);
-    inet_pton(AF_INET, "192.168.33.128", &saddr.sin_addr.s_addr);
+    inet_pton(AF_INET, "127.0.0.1", &saddr.sin_addr.s_addr); // 127.0.0.1指向本地ip
     int ret = connect(fd, (struct sockaddr*)&saddr, sizeof(saddr));
     if (ret == -1)
     {
