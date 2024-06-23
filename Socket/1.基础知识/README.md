@@ -2,7 +2,7 @@
 
 这里的笔记是Linux的套接字用法，window略有不同但大差不差，要用到的时候再去找
 
-## 字节序
+## 前置知识
 
 字节序分为大端(网络字节序)和小端(主机字节序)
 
@@ -20,6 +20,9 @@
 * uint32_t ntohl(uint32_t netlong);    // int类型的小端转大端
 
 ### IP地址转换
+
+大小端转换函数仅针对数值型，一般存ip还会有.用于分隔，inet_pton和inet_ntop处理
+
 * #include <arpa/inet.h>
 * int inet_pton(int af, const char *src, void *dst);
     * 第一个参数 af
@@ -36,6 +39,36 @@
     * dst: 传出参数，小端点分十进制ip地址
     * size: 修饰dst参数，标记dst指向的内存中最多可以存储多少个字节
     * 成功返回第三个参数对应的内存地址，失败NULL
+
+### sockaddr, in_addr, sockaddr_in
+
+三个结构体，用于socket函数的传参，存储的是协议、ip和端口
+
+```c++
+// 在写数据的时候不好用，一般是定义一个sockaddr_in，分别给ip和port赋值，然后转换为sockaddr
+struct sockaddr {
+	sa_family_t sa_family;       // 地址族协议, ipv4
+	char        sa_data[14];     // 端口(2字节) + IP地址(4字节) + 填充(8字节)
+}
+
+struct in_addr
+{
+    in_addr_t s_addr;  // 本质是一个数值类型
+};  
+
+// sizeof(struct sockaddr) == sizeof(struct sockaddr_in)
+struct sockaddr_in
+{
+    sa_family_t sin_family;		/* 地址族协议: AF_INET */
+    in_port_t sin_port;         /* 端口, 2字节-> 大端  */
+    struct in_addr sin_addr;    /* IP地址, 4字节 -> 大端  */
+    /* 填充 8字节 */
+    unsigned char sin_zero[sizeof (struct sockaddr) - sizeof(sin_family) -
+               sizeof (in_port_t) - sizeof (struct in_addr)];
+}; 
+// 使用时定义一个sockaddr_in，分别给sin_family, sin_prot, sin_addr赋值
+// 然后(struct addr*)&sockaddr_in，强制转换即可
+```
 
 ## 通信流程
 
