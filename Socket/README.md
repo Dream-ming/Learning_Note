@@ -132,7 +132,7 @@ struct sockaddr_in
     * 第一个参数 sockfd
         * 通信的文件描述符，socket()得到
     * 第二个参数 addr
-        * 存储了要连接的服务器端的IP和端第三个口，需要大端
+        * 存储了要连接的服务器端的IP和端口，需要大端
     * 第三个参数 addrlen
         * sizeof(struct addr);
     * 连接成功返回0，失败返回-1
