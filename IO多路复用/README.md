@@ -1,6 +1,6 @@
 # IO多路复用
 
-[7132cab2bbfa070f4bfaf61efa7a54c.png](https://postimg.cc/64vskqBK)
+[![7132cab2bbfa070f4bfaf61efa7a54c.png](https://i.postimg.cc/2yHzBLJ1/7132cab2bbfa070f4bfaf61efa7a54c.png)](https://postimg.cc/64vskqBK)
 
 ## Socket多线程操作
 
