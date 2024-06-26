@@ -1,8 +1,8 @@
 # IO多路复用
 
-[![7132cab2bbfa070f4bfaf61efa7a54c.png](https://i.postimg.cc/yxW1N9cd/7132cab2bbfa070f4bfaf61efa7a54c.png)](https://postimg.cc/LgKKCJyK)
-
 ## Socket多线程操作
+
+[![7132cab2bbfa070f4bfaf61efa7a54c.png](https://i.postimg.cc/yxW1N9cd/7132cab2bbfa070f4bfaf61efa7a54c.png)](https://postimg.cc/LgKKCJyK)
 
 在Socket通信中，服务端有两类文件描述符，一个用于监听的，N个用于通信的
 
