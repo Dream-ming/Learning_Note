@@ -4,7 +4,7 @@
 ### pthread_self()
 查询当前线程的 ID 
 
-### pthread_create(pthread_t, const pthread_attr_t \*attr, void\*, void *arg)
+### pthread_create(pthread_t *, const pthread_attr_t \*attr, void\*, void *arg)
 创建线程函数    
 
 需要传四个参数：线程ID，线程的属性(一般使用默认属性，写NULL)，函数指针(一个函数名，该函数在本子线程中执行)，传递给函数的参数
