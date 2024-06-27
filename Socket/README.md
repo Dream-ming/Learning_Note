@@ -96,6 +96,8 @@ struct sockaddr_in
         * 用于监听的文件描述符，通过socket()调用得到
     * 第二个参数 addr
         * 传入要绑定的IP和端口信息，必须是大端，函数会给addr赋值
+        * 这里一般用sockaddr_in结构体指定端口、ip，然后转换为sockaddr类型
+        * addr.sin_addr.s_addr用于指定ip，写INADDR_ANY，值为0.0.0.0，如果本地机器有多个网卡多个ip，可以都检测到
     * 第三个参数 addrlen
         * 传入 addr 的内存大小，sizeof(struct sockaddr)即可
     * 成功返回0，失败返回-1
