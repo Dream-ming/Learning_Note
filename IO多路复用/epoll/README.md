@@ -48,5 +48,7 @@ struct epoll_event {
     * 结构体中的第二个参数是一个联合体
       * 用户可以自行传入一些参数，内核不做修改，原样传出
       * 比如传入文件描述符，这样拿到这个节点的时候就知道对应哪个了
-
-* 
+* int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);
+  * 阻塞函数，检测 epoll 树上是否有可用的文件描述法
+ 	* 第一个参数 epfd
+  *  
