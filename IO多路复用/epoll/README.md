@@ -49,6 +49,16 @@ struct epoll_event {
       * 用户可以自行传入一些参数，内核不做修改，原样传出
       * 比如传入文件描述符，这样拿到这个节点的时候就知道对应哪个了
 * int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);
-  * 阻塞函数，检测 epoll 树上是否有可用的文件描述法
- 	* 第一个参数 epfd
-  *  
+  * 阻塞函数，检测 epoll 树上是否有可用的文件描述符
+  * 第一个参数 epfd
+    * epoll_create的返回值，指向epoll实例
+  * 第二个参数 *event
+    * 传出参数
+    * 当有文件描述符就绪时，传出到此结构体
+  * 第三个参数 maxevents
+    * 修饰第二个参数，指定最大容量
+  * 第四个参数 timeout
+    * 指定检测的时间(毫秒)
+    * 指定-1会永久检测
+  * 返回值
+    * 已经就绪的文件描述符的个数
