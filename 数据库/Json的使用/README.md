@@ -76,5 +76,38 @@ Json文件举例，本身是一个大的数组，里面有各种类型的成员
 对 Json 数组的操作
 * 可以通过下标操作
 * item.size(); // 取数组元素个数，for循环遍历下标即可使用
-* item.append();
-* 
+* item.append(tmp); // 向数组中添加元素
+* item.begin();  // 首元素迭代器
+* item_end();    // 尾迭代器
+* item.empty();  // 是否为空
+* item.resize(int x); // 更改大小，如果传入为0则清空
+
+对 Json 对象的操作
+* 与 map 类似
+* item.getMemberNames()，得到所有的键值
+    * typedef std::vector<std::string> Members;
+    * Members getMemberNames() const;
+
+将Value对象数据序列化为string，带换行样式
+* item.toStyledString()
+
+### FastWriter 类
+
+将Value对象序列化为String，不带换行
+```c++
+FastWriter w;
+string json = w.write(item); // 得到无换行符的数据
+ofstream ofs("test.json");
+ofs << json;
+ofs.close();
+```
+
+### Reader 类
+
+读入一个文件，并写入json
+```c++
+ifstream ifs("test.json");
+Reader rd;
+Value root;
+rd.parse(ifs, item); // 指定一个文件流，也可以指定字符串，写入item中
+```
