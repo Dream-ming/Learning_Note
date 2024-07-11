@@ -53,6 +53,9 @@
     + [线程同步之原子变量](#---------)
     + [线程异步](#----)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 ## 1、原始字面量 R"xxx()xxx"
 
 用途：处理转义字符反斜杠问题
