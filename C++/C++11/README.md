@@ -1,5 +1,3 @@
-# C++11特性笔记
-
 - [C++11特性笔记](#c--11----)
   * [1、原始字面量 R"xxx()xxx"](#1-------r-xxx--xxx-)
   * [2、字符串和数值类型之间的转换](#2--------------)
@@ -54,7 +52,7 @@
     + [线程异步](#----)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
+# C++11特性笔记
 
 ## 1、原始字面量 R"xxx()xxx"
 
