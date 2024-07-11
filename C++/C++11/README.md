@@ -1,60 +1,64 @@
-- [C++11特性笔记](#c--11----)
-  + [1、原始字面量 R"xxx()xxx"](#1-------r-xxx--xxx-)
-  * [2、字符串和数值类型之间的转换](#2--------------)
-    + [数值转换为字符串 to_string()](#---------to-string--)
-    + [字符串转换为数字](#--------)
-  * [3、超长整形long long](#3-----long-long)
-  * [4、标准的类成员初始化](#4----------)
-  * [5、final 和 override](#5-final---override)
-    + [final](#final)
-    + [override](#override)
-  * [6、assert 、 throw 和 noexpect](#6-assert---throw---noexpect)
-    + [断言assert](#--assert)
-    + [throw 和 noexpect](#throw---noexpect)
-  * [7、自动类型推导 auto 和 decltype](#7--------auto---decltype)
-    + [decltype](#decltype)
-  * [8、Lambda表达式](#8-lambda---)
-  * [9、NULL 和 nullptr 的区别](#9-null---nullptr----)
-  * [10、constexpr](#10-constexpr)
-  * [11、浅拷贝和深拷贝](#11--------)
-  * [12、左值、右值、左值引用、右值引用、move、forward](#12-----------------move-forward)
-  * [13、using](#13-using)
-  * [14、委托构造函数](#14-------)
-  * [15、继承构造函数](#15-------)
-  * [16、统一的初始化列表](#16---------)
-  * [17、智能指针](#17-----)
-    + [共享的智能指针](#-------)
-    + [独占的智能指针](#-------)
-    + [弱引用智能指针](#-------)
-    + [解决shared_ptr被重复析构](#--shared-ptr-----)
-    + [解决shared_ptr循环引用导致无法析构问题](#--shared-ptr------------)
-  * [18、POD类型(plain old data)](#18-pod---plain-old-data-)
-    + [平凡类型(trivial)](#-----trivial-)
-    + [标准布局类型](#------)
-    + [PDO类型的作用](#pdo-----)
-  * [19、默认函数控制（=default与=delete）](#19---------default--delete-)
-    + [=default(等于默认)](#-default------)
-    + [=delete(等于删除)](#-delete------)
-  * [20、友元的优化](#20------)
-  * [21、强类型枚举](#21------)
-  * [22、联合体(union)](#22-----union-)
-  * [23、处理日期和时间的chrono库](#23---------chrono-)
-    + [duration（时间段）](#duration-----)
-    + [time_point（时间点）](#time-point-----)
-    + [clocks](#clocks)
-    + [转换函数duration_cast和time_point_cast](#----duration-cast-time-point-cast)
-  * [24、多线程](#24----)
-    + [this_thread命名空间](#this-thread----)
-    + [线程库](#---)
-    + [call_once()函数](#call-once----)
-    + [线程同步之互斥锁](#--------)
-    + [线程同步之原子变量](#---------)
-    + [线程异步](#----)
+<a name="index">**Index**</a>
+<a href="#0">C++11特性笔记</a>  
+&emsp;<a href="#1">1、原始字面量 R"xxx()xxx"</a>  
+&emsp;<a href="#2">2、字符串和数值类型之间的转换</a>  
+&emsp;&emsp;<a href="#3">数值转换为字符串 to_string()</a>  
+&emsp;&emsp;<a href="#4">字符串转换为数字</a>  
+&emsp;<a href="#5">3、超长整形long long</a>  
+&emsp;<a href="#6">4、标准的类成员初始化</a>  
+&emsp;<a href="#7">5、final 和 override</a>  
+&emsp;&emsp;<a href="#8">final</a>  
+&emsp;&emsp;<a href="#9">override</a>  
+&emsp;<a href="#10">6、assert 、 throw 和 noexpect</a>  
+&emsp;&emsp;<a href="#11">断言assert</a>  
+&emsp;&emsp;<a href="#12">throw 和 noexpect</a>  
+&emsp;<a href="#13">7、自动类型推导 auto 和 decltype</a>  
+&emsp;&emsp;<a href="#14">decltype</a>  
+&emsp;<a href="#15">8、Lambda表达式</a>  
+&emsp;<a href="#16">9、NULL 和 nullptr 的区别</a>  
+&emsp;<a href="#17">10、constexpr</a>  
+&emsp;<a href="#18">11、浅拷贝和深拷贝</a>  
+&emsp;<a href="#19">12、左值、右值、左值引用、右值引用、move、forward</a>  
+&emsp;<a href="#20">13、using</a>  
+&emsp;<a href="#21">14、委托构造函数</a>  
+&emsp;<a href="#22">15、继承构造函数</a>  
+&emsp;<a href="#23">16、统一的初始化列表</a>  
+&emsp;<a href="#24">17、智能指针</a>  
+&emsp;&emsp;<a href="#25">共享的智能指针</a>  
+&emsp;&emsp;<a href="#26"> 独占的智能指针</a>  
+&emsp;&emsp;<a href="#27">弱引用智能指针</a>  
+&emsp;&emsp;<a href="#28">解决shared_ptr被重复析构</a>  
+&emsp;&emsp;<a href="#29">解决shared_ptr循环引用导致无法析构问题</a>  
+&emsp;<a href="#30">18、POD类型(plain old data)</a>  
+&emsp;&emsp;<a href="#31">平凡类型(trivial)</a>  
+&emsp;&emsp;<a href="#32">标准布局类型</a>  
+&emsp;&emsp;<a href="#33">PDO类型的作用</a>  
+&emsp;<a href="#34">19、默认函数控制（=default与=delete）</a>  
+&emsp;&emsp;<a href="#35">=default(等于默认)</a>  
+&emsp;&emsp;<a href="#36">=delete(等于删除)</a>  
+&emsp;<a href="#37">20、友元的优化</a>  
+&emsp;<a href="#38">21、强类型枚举</a>  
+&emsp;<a href="#39">22、联合体(union)</a>  
+&emsp;<a href="#40">23、处理日期和时间的chrono库</a>  
+&emsp;&emsp;<a href="#41">duration（时间段）</a>  
+&emsp;&emsp;<a href="#42">time_point（时间点）</a>  
+&emsp;&emsp;<a href="#43">clocks</a>  
+&emsp;&emsp;<a href="#44">转换函数duration_cast和time_point_cast</a>  
+&emsp;<a href="#45">24、多线程</a>  
+&emsp;&emsp;<a href="#46">this_thread命名空间</a>  
+&emsp;&emsp;<a href="#47">线程库</a>  
+&emsp;&emsp;<a href="#48">call_once()函数</a>  
+&emsp;&emsp;<a href="#49">线程同步之互斥锁</a>  
+&emsp;&emsp;<a href="#50">线程同步之原子变量</a>  
+&emsp;&emsp;<a href="#51">线程异步</a>  
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-# C++11特性笔记
+# <a name="0">C++11特性笔记</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-## 1、原始字面量 R"xxx()xxx"
+[TOC]
+
+
+
+## <a name="1">1、原始字面量 R"xxx()xxx"</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：处理转义字符反斜杠问题
 
@@ -83,9 +87,9 @@ D\\ME\\TEMP\\TEMP
 */
 ```
 
-## 2、字符串和数值类型之间的转换
+## <a name="2">2、字符串和数值类型之间的转换</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### 数值转换为字符串 to_string()
+### <a name="3">数值转换为字符串 to_string()</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用法：
 * to_string函数的参数可以是int、float、unsigned long long等任何类型的单一数字
@@ -103,7 +107,7 @@ pi is 3.141592
 */
 ```
 
-### 字符串转换为数字
+### <a name="4">字符串转换为数字</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用法：
 * 以下的函数共有三个参数(string, size_t* pos, base)
@@ -136,7 +140,7 @@ pi is 3.141592
 */
 ```
 
-## 3、超长整形long long
+## <a name="5">3、超长整形long long</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 危：OI就开始用了，五年过去，现在才知道是c++11加入的
 
@@ -156,7 +160,7 @@ pi is 3.141592
 * long long int：最少8个字节
 * 一个字节 = 8位
 
-## 4、标准的类成员初始化
+## <a name="6">4、标准的类成员初始化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：在类的内部快速初始化成员变量
 
@@ -191,9 +195,9 @@ int main() {
 */
 ```
 
-## 5、final 和 override
+## <a name="7">5、final 和 override</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### final
+### <a name="8">final</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：拒绝子类的函数复写，或拒绝其他类的继承
 
@@ -201,7 +205,7 @@ int main() {
 * 修饰函数时：父类写了一个虚函数等待子类继承使用，如果子类继承该函数，并在函数后写上 final 关键字，那么孙子类就无法再次重写该函数，其他子类在继承父类的函数时，可正常使用
 * 修饰类时：在类名后面写 final ，其他类无法再继承该类
 
-### override
+### <a name="9">override</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：保证函数是由父类继承过来的，而不是拼写错误导致新定义了一个函数
 
@@ -230,9 +234,9 @@ public:
 }
 ```
 
-## 6、assert 、 throw 和 noexpect
+## <a name="10">6、assert 、 throw 和 noexpect</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### 断言assert
+### <a name="11">断言assert</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：在程序碰到不想要的情况时，中断程序
 
@@ -254,7 +258,7 @@ int main() {
 }
 ```
 
-### throw 和 noexpect
+### <a name="12">throw 和 noexpect</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：碰到异常值时，可以抛出异常，并结束程序
 
@@ -293,7 +297,7 @@ int main() {
 
 在c++11中， noexpect 关键字，代替了throw()，表示函数无法抛出异常，且性能更佳
 
-## 7、自动类型推导 auto 和 decltype
+## <a name="13">7、自动类型推导 auto 和 decltype</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：自动推导变量的类型
 
@@ -353,7 +357,7 @@ int main() {
 }
 ```
 
-### decltype
+### <a name="14">decltype</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 用途：用于推导变量的类型，与 auto 用法不同，主要在泛型编程中使用
 
@@ -404,7 +408,7 @@ int main()
 }
 ```
 
-## 8、Lambda表达式
+## <a name="15">8、Lambda表达式</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 简介：定义一个匿名函数，可以捕获一定范围内的变量，简洁方便快捷。本质是一个仿函数，可以使用function和bind来存储。
 
@@ -412,22 +416,22 @@ int main()
 * \[capture](params) opt -> ret { body; };
 	* capture 是捕获列表
  		* []：不捕捉任何变量
-      		* \[&]：捕获外部所有变量，并作为引用在函数体内使用
+            		* \[&]：捕获外部所有变量，并作为引用在函数体内使用
           	* \[=]：捕获外部所有变量，并拷贝副本在函数使用，且拷贝出来的变量是只读的
-      	* \[=, &x]：拷贝捕获外部所有变量，但是 x 以引用的方式使用
-      	* \[&, =x]：没有这种语法
-      	* \[var]：拷贝捕获变量 var ，除此以外不用其他的变量
-      	* \[&var]：引用捕获变量 var ，除此以外不用其他变量
-      	* \[this]：捕获 this 指针，让表达式可以访问当前类成员， & 或 = 会默认捕获 this
+            	* \[=, &x]：拷贝捕获外部所有变量，但是 x 以引用的方式使用
+            	* \[&, =x]：没有这种语法
+            	* \[var]：拷贝捕获变量 var ，除此以外不用其他的变量
+            	* \[&var]：引用捕获变量 var ，除此以外不用其他变量
+            	* \[this]：捕获 this 指针，让表达式可以访问当前类成员， & 或 = 会默认捕获 this
  	* params 是参数列表
-    		* 作为函数的参数使用，由调用函数语句提供，和其他函数一样的用法 
+        		* 作为函数的参数使用，由调用函数语句提供，和其他函数一样的用法 
   	* opt 是函数选项
-    		* mutable：拷贝捕获变量的时候，使拷贝对象可修改，但也仅是修改拷贝的变量
-    	 	* exception：指定函数破除的异常 
+        		* mutable：拷贝捕获变量的时候，使拷贝对象可修改，但也仅是修改拷贝的变量
+        	 	* exception：指定函数破除的异常 
   	* -> ret 是返回值类型
-    		* ret 写一个类型名，表示Lambda表达式的返回值类型，不写的话程序也会自动推导
+        		* ret 写一个类型名，表示Lambda表达式的返回值类型，不写的话程序也会自动推导
   	* body 是函数体
-    		* 与正常函数一样 
+        		* 与正常函数一样 
   	* 花括号后面记得加分号 
 
 实例：
@@ -463,26 +467,26 @@ int main()
 }
 ```
 
-## 9、NULL 和 nullptr 的区别
+## <a name="16">9、NULL 和 nullptr 的区别</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 NULL：在c语言中，NULL是void\*类型。到了c++11，不允许void\*隐式的给int*等其他类型赋值，会导致旧程序报错。于是c++11将NULL宏定义成了常数0。(define NULL 0)    
 
 nullptr：c++11中引入的新指针，是一个指针变量的空指针
 
-## 10、constexpr
+## <a name="17">10、constexpr</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 const：在旧的版本中用于修饰只读变量和常量    
 constexpr：c++11中新添关键字，用于修饰常量    
 建议：c++11以后，const仅用于只读变量，constexpr用于常量
 
-## 11、浅拷贝和深拷贝
+## <a name="18">11、浅拷贝和深拷贝</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 浅拷贝：基本类型(int)开辟新的空间并复制值，数组等类型复制其指针，使新旧数组值向同一个地址    
 深拷贝：为数组等类型也开辟新的空间，防止修改新数组时旧数组也被修改    
 在类的拷贝时，如果没写拷贝构造函数，系统默认使用浅拷贝    
 可用通过自定义拷贝构造函数或重载赋值运算符实现深拷贝   
 
-## 12、左值、右值、左值引用、右值引用、move、forward
+## <a name="19">12、左值、右值、左值引用、右值引用、move、forward</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 左值：存储在内存中，可用取地址    
 * int a;
@@ -584,7 +588,7 @@ int main()
 }
 ```
 
-## 13、using
+## <a name="20">13、using</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 * 使用命名空间，如 using namespace std;
 * 使用父类的函数，如果父类中有多个同名的重载函数，子类中也有一个同名函数，那么子类会将父类的函数屏蔽，要调用的话需要 using 父类::函数名;
@@ -598,7 +602,7 @@ using MMap = map<int, T>
 MMap<string> m; // 等价map<int, string> m;
 ```
 
-## 14、委托构造函数
+## <a name="21">14、委托构造函数</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 在一个构造函数的初始化列表中使用另一个构造函数，达到代码复用的效果，如：
 ```c++
@@ -651,7 +655,7 @@ public:
 
 ```
 
-## 15、继承构造函数
+## <a name="22">15、继承构造函数</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 在子类中用using直接声明父类的构造函数，简化代码    
 实际上是using的用法，不光继承构造函数，其他函数也可以继承，具体看using部分介绍
 ```c++
@@ -698,7 +702,7 @@ public:
 };
 ```
 
-## 16、统一的初始化列表
+## <a name="23">16、统一的初始化列表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 常见的初始化方式：
 * 变量：int a = 5;
@@ -711,11 +715,11 @@ public:
 * 类：Test t{10, 20;
 * 指针：int* p = new int{50};
 
-## 17、智能指针
+## <a name="24">17、智能指针</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 共享的智能指针(shared_ptr)、独占的智能指针(unique_ptr)、弱引用的智能指针(weak_ptr)
 
-### 共享的智能指针
+### <a name="25">共享的智能指针</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 性质：多个指针指向同一块内存，可以记录个数。ptr.use_count() 得到指向ptr指向的内存的指针个数  
 
@@ -734,11 +738,11 @@ public:
 		* 先获取原始指针，再使用
 			* ptr.reset(new Test("hello");
 			* Test* t = ptr.get();
-    			* t->fac();
+        			* t->fac();
 		* 通过智能指针对象直接操作
 			* ptr->fac();
-      	* 调用共享指针的函数
-      		* ptr.get();  // 返回ptr指向的地址
+            	* 调用共享指针的函数
+            		* ptr.get();  // 返回ptr指向的地址
 * 取值操作本质与指针一样
 	* shared_ptr<int> ptr(new int(8));
 	* cout << *ptr;  // 8
@@ -748,9 +752,9 @@ public:
 * 指定删除器函数：shared_ptr在指向数组时无法自动析构，其他类型都会自动析构
 	* shared_ptr<int[]> ptr(new int[5], lamda表达式); // 自定义表达式析构
  		*  lamda: [](int* t){ delete []t; }
-      	* shared_ptr<int[]> ptr(new int[5], default_delete<int []>()); // 用系统的删除器删除，<写类型> 
+            	* shared_ptr<int[]> ptr(new int[5], default_delete<int []>()); // 用系统的删除器删除，<写类型> 
 
- ### 独占的智能指针
+ ### <a name="26">独占的智能指针</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 性质：独占一块内存的指针 
 
@@ -762,7 +766,7 @@ public:
 
 用法与共享指针相同
 
-### 弱引用智能指针
+### <a name="27">弱引用智能指针</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 性质：用于辅助shared_ptr，帮sp解决重复析构，循环无法析构问题
 
@@ -778,7 +782,7 @@ public:
 * wp.lock() : 得到一个指向wp内存的sp对象
 * wp.reset() : 使wp不指向任何内存
 
-### 解决shared_ptr被重复析构
+### <a name="28">解决shared_ptr被重复析构</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 ```c++
 struct Test{
@@ -826,7 +830,7 @@ struct Test : public enable_shared_from_this<Test>
 };
 ```
 
-### 解决shared_ptr循环引用导致无法析构问题
+### <a name="29">解决shared_ptr循环引用导致无法析构问题</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 [![9db86a7b4fda0331181c9caaee96faf.jpg](https://i.postimg.cc/xCzp2pqG/9db86a7b4fda0331181c9caaee96faf.jpg)](https://postimg.cc/vgGt7zrD)
 
@@ -876,12 +880,12 @@ cout << ptr1.use_count() << endl; // 2，ptr1指向的TA被ptr1和aptr引用
 cout << ptr2.use_count() << endl; // 1，ptr2指向的TB被ptr2引用，bptr是一个weak_ptr，不增加use_count
 ```
 
-## 18、POD类型(plain old data)
+## <a name="30">18、POD类型(plain old data)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 普通的变量都是POD类型的。   
 结构体和类需要满足一些条件才能称为POD类型，分为两种：平凡类型和标准布局类型　　　　
 
-### 平凡类型(trivial)
+### <a name="31">平凡类型(trivial)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 要求
 * 拥有平凡的(默认的)构造函数和析构函数（类里面没有自定义构造和析构函数)
@@ -893,7 +897,7 @@ cout << ptr2.use_count() << endl; // 1，ptr2指向的TB被ptr2引用，bptr是�
 模板类is_trivial<T>中的成员value，若传入的是平凡的类型，value为true，否则为false   
 cout << is_trivial<Test>::value << endl;   
 
-### 标准布局类型
+### <a name="32">标准布局类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 要求
 * 所有的非静态成员拥有相同的访问权限（成员仅有public、private、protect的其中一种）
@@ -908,13 +912,13 @@ cout << is_trivial<Test>::value << endl;
 函数判断   
 模板类is_standard_layout<T>同上
 
-### PDO类型的作用
+### <a name="33">PDO类型的作用</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 * 可以安全地使用memset和memcpy对字节赋值
 * 可以与C兼容
 * 保证静态初始化的安全有效
 
-## 19、默认函数控制（=default与=delete）
+## <a name="34">19、默认函数控制（=default与=delete）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 c++的六大函数：
 * 无参构造函数：创建类对象
@@ -924,7 +928,7 @@ c++的六大函数：
 * 移动赋值函数：类对象赋值
 * 析构函数：销毁类对象
 
-### =default(等于默认)
+### <a name="35">=default(等于默认)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 如果自己定义了构造函数，默认的无参构造函数就会消失，类就不属于平凡的POD类型    
 如果想要使类变成POD类型，可以用＝default将默认的构造函数手动写出
@@ -944,7 +948,7 @@ public:
 Test::Test() = default;
 ```
 
-### =delete(等于删除)
+### <a name="36">=delete(等于删除)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 可以显示的将某一个函数删除   
 
@@ -963,7 +967,7 @@ t.print('a'); // 如果不写delete，编译器会将'a'转换为int类型，然
 // 将print(char c)删除后，系统会报错
 ```
 
-## 20、友元的优化
+## <a name="37">20、友元的优化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 在c++11以前，要申明友元，需要写出关键字class，c++11中不需要    
 申明友元使类之间可以相互使用protected、private的成员，在一定程度上破坏了c++封装的特性，但是为了书写简洁还是使用了    
@@ -1011,7 +1015,7 @@ class Test {
 // 当T传入int、char等基础变量时，编译器会直接忽视，传入class类型时会将其声明为友元
 ```
 
-## 21、强类型枚举
+## <a name="38">21、强类型枚举</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 在c++98中，枚举的类型是全局可见的，在不同的枚举中定义相同的变量会报错，并且在输出的时候会进行隐式的类型转换，这十分不符合c++封装的特点   
 
@@ -1043,7 +1047,7 @@ cout << (int)CC::Red << endl;  // 97，必须进行显式的类型转换
 cout << (char)CC::Red << endl; // a，可以指定值
 ```
 
-## 22、联合体(union)
+## <a name="39">22、联合体(union)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 性质：联合体内的成员共用一块内存，在一些场景下，可以节约内存
 
@@ -1112,13 +1116,13 @@ Principal cardId: 11001010
 
 ```
 
-## 23、处理日期和时间的chrono库
+## <a name="40">23、处理日期和时间的chrono库</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 头文件：<chronon>   
 命名空间：using namespace chronon;   
 包含模板类：时间间隔duration、时钟clocks、时间点time_point
 
-### duration（时间段）
+### <a name="41">duration（时间段）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 定义一个时间段 duration<T, std::ratio<int, int>>   
 T传入参数，可以是整数也可以是浮点数，表示周期个数。
@@ -1159,12 +1163,12 @@ auto t3 = t1 - t2; // 对于不同的ratio，会先统一单位，对分子取�
 cout << t3.count() << endl;  // .count函数输出周期个数，t3单位为1s，计算出周期数为540
 ```
 
-### time_point（时间点）
+### <a name="42">time_point（时间点）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 * time_since_epoch(); // 从 1970年1月1日8:00:00 到此时的时间段
 * 想要得到一个时间点对象，通常需要配合clocks使用
 
-### clocks
+### <a name="43">clocks</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 * system_clock：系统的时钟，在代码运行的过程中，如果修改了系统时钟，那么就无法精准的得到想要的时间段   
 * steady_clock：固定的时钟，相当于秒表，可以进行耗时统计   
@@ -1194,7 +1198,7 @@ void steadyClockTest() {
 }
 ```
 
-### 转换函数duration_cast和time_point_cast
+### <a name="44">转换函数duration_cast和time_point_cast</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 duration<周期个数, ratio<分子，分母>> t1, t2;   
 当t2想要赋值给t1，需要满足：
@@ -1205,7 +1209,7 @@ duration<周期个数, ratio<分子，分母>> t1, t2;
 time_point_cast条件和用法类似
 
 
-## 24、多线程
+## <a name="45">24、多线程</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 一个未启动的exe仅在硬盘上占一块空间   
 一个启动的exe不占硬盘内存，占用内存和cpu资源，称之为进程   
@@ -1217,7 +1221,7 @@ time_point_cast条件和用法类似
 并行：多核cpu同时运行多个进程   
 并发：多个线程交替运行      
 
-### this_thread命名空间
+### <a name="46">this_thread命名空间</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 接口：
 * get_id()：得到当前线程的id
@@ -1230,7 +1234,7 @@ time_point_cast条件和用法类似
 * sleep_until(time_point)：阻塞线程到某一个时间点
 * yield()：让线程主动放弃cpu资源，避免一个线程长期占用cpu资源。线程放弃cpu后，会继续抢cpu
 
-### 线程库
+### <a name="47">线程库</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 从c++11开始，c++终于有了自己的线程库，此前要多线程一直在使用C语言的接口
 
@@ -1255,7 +1259,7 @@ time_point_cast条件和用法类似
 	* int num = thread::hardware_concurrency();
  	* 获取机器的cpu核心数
 
-### call_once()函数
+### <a name="48">call_once()函数</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 某一个类中有一个静态成员，多个线程可能会对其进行初始化，但我们想让静态成员仅被初始化一次，就可以使用该函数  
 
@@ -1263,7 +1267,7 @@ once_flag g_flag;  // 函数的第一个参数，需要设置在所有线程都�
 call_once(g_flag, func, arg...);  // func是call_once执行的函数，arg是给func传递的参数   
 // call_once会保证func函数仅被调用一次
 
-### 线程同步之互斥锁
+### <a name="49">线程同步之互斥锁</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 #include <mutex> 头文件
 
@@ -1292,7 +1296,7 @@ call_once(g_flag, func, arg...);  // func是call_once执行的函数，arg是给
  	* 当锁的生命周期结束，会自动解锁
   	* 可以解决忘记unlock带来的死锁问题
 
-### 线程同步之原子变量
+### <a name="50">线程同步之原子变量</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 原子指的是一系列不可被CPU上下文交换的机器指令，这些指令组合在一起就形成了原子操作。在多核CPU下，当某个CPU开始运行原子操作时，会暂停其他CPU内核对内存的操作，以保证不会发生数据混乱   
 
@@ -1318,7 +1322,7 @@ call_once(g_flag, func, arg...);  // func是call_once执行的函数，arg是给
 使用互斥锁实现线程同步的时候，将可能同时访问的共享数据进行加锁操作，以此保护共享数据   
 使用原子变量，直接将共享数据设置为原子变量即可，但是复合类型的数据不能使用atomic
 
-### 线程异步
+### <a name="51">线程异步</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 一个线程在等待另一个线程的结果时，呈阻塞态，就是线程同步   
 一个线程在等待另一个线程的结果时，去干其他的事情，就叫线程异步   
