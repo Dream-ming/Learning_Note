@@ -51,11 +51,7 @@
 &emsp;&emsp;<a href="#49">线程同步之互斥锁</a>  
 &emsp;&emsp;<a href="#50">线程同步之原子变量</a>  
 &emsp;&emsp;<a href="#51">线程异步</a>  
-
 # <a name="0">C++11特性笔记</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-
-[TOC]
-
 
 
 ## <a name="1">1、原始字面量 R"xxx()xxx"</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -427,7 +423,7 @@ int main()
         		* 作为函数的参数使用，由调用函数语句提供，和其他函数一样的用法 
   	* opt 是函数选项
         		* mutable：拷贝捕获变量的时候，使拷贝对象可修改，但也仅是修改拷贝的变量
-        	 	* exception：指定函数破除的异常 
+                	 	* exception：指定函数破除的异常 
   	* -> ret 是返回值类型
         		* ret 写一个类型名，表示Lambda表达式的返回值类型，不写的话程序也会自动推导
   	* body 是函数体
