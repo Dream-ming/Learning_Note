@@ -35,3 +35,21 @@ int scandir(const char* dirp, struct dirent*** namelist,
 // 第三个参数 filter : 函数指针，自定义筛选目录的条件，在函数中需要的目录返回1，不需要的返回0
 // 第四个参数 compar : 函数指针，自定义文件顺序，可以使用系统的函数alphasort(根据文件名排序)，versionsort(根据版本排序)
 ```
+
+## 3、sendfile 发送文件函数
+
+```c
+off_t offset = 0; // off_t本质是一个整形
+int size = lseek(fd, 0, SEEK_END); // 得到文件的字节数，此处lseek会把指针移动到文件尾部
+lseek(fd, 0, SEEK_SET); // 把文件指针移回头部，让sendfile能从文件头部开始发送
+while (offset < size) // sendfile有文件大小的限制，如果发送文件太大了，就会只发送一部分
+{
+    int ret = sendfile(cfd, fd, &offset, size); // 客户端，本地文件描述符，文件偏移量，文件大小
+    // 如果一次没有发送完，offset会移动到当前发送的位置，下次再调用时指定该偏移量即可继续发送
+    printf("ret value: %d\n", ret); // 如果成功发送，返回发送的字节数
+    if (ret == -1)               // 如果发送失败，返回-1
+    {
+        perror("sendfile");
+    }
+}
+```
