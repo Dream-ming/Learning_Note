@@ -76,7 +76,9 @@ echo：在文件中写入内容
 
 adduser、su、deluser：用户操作
 * sudo adduser 用户名：创建新用户，并指定用户名。普通用户下创建新用户需要加sudo指令，使用管理员权限
-* su - 用户名：切换到其他用户
+* su - 用户名：切换到其他用户，并跳转到该用户的家目录
+* su 用户名：切换到其他用户
+* su root：切换到管理员用户
 * sudo userdel 用户名 -r：删除用户，将其家目录文件一并删除
 * sudo groupadd 组名：添加用户组
 * sudo groupdel 组名：删除用户组
