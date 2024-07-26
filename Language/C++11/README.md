@@ -51,6 +51,8 @@
 &emsp;&emsp;<a href="#49">线程同步之互斥锁</a>  
 &emsp;&emsp;<a href="#50">线程同步之原子变量</a>  
 &emsp;&emsp;<a href="#51">线程异步</a>  
+&emsp;<a href="#52">25、 inline 内联函数</a>  
+
 # <a name="0">C++11特性笔记</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
@@ -1344,3 +1346,16 @@ string str = f.get();  // get得到子线程赋的值，如果子线程没有赋
 cout << str << endl; // 输出
 t1.join();
 ```
+
+## <a name="52">25、 inline 内联函数</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+inline关键字：定义内联函数，消耗内存，提高性能    
+
+用法：inline int func(int a, int b) { return a + b; }    
+
+性质：
+
+* 定义内联函数，当其他地方调用函数使，会在调用处展开函数
+* 可以节约一个函数调用的消耗，但是原地展开函数内容需要消耗内存
+* 一般只有十分短小的函数使用，比如类中获取私有成员的函数，函数体仅有一个返回值
+* inline 仅是一个对编译器的建议，具体是否内联由编译器决定
