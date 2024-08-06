@@ -42,6 +42,9 @@
   * 将本地的 dev 分支推送到 github 上
 * git pull origin smart
   * 将 github 上的 smart 分支拉取到本地
+* git clone 仓库地址
+  * 克隆仓库
+  * git clone -b 分支名 仓库地址：指定分支克隆
  
 * ssh-keygen -t rsa -C '邮箱'
   * 生成ssh密钥，创建在 ~/.ssh
