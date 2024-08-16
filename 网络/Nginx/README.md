@@ -10,7 +10,7 @@ nginx可以将端口接收到的报文转发给其他端口
 
 ``` nginx
 # 先下载
-sudo aot update
+sudo apt update
 sudo apt install nginx
 # 进入配置文件
 vim /etc/nginx/sites-available/default
