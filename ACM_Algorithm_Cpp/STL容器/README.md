@@ -136,7 +136,7 @@ for (auto x : deq)
 
 ## map/multimap
 
-底层用红黑树实现，会自动排序，插入查询为O(logN)    
+底层用红黑树实现，会按照键值排序，插入查询为O(logN)    
 multimap允许一个键有多个值，其他内容与map完全相同
 
 ```c++
@@ -148,4 +148,58 @@ multimap<string, int> mulmp;  // 定义一个multimap
 mp["abc"] = 3;  // 将"abc"映射到3
 mp["abc"]++;  // 将"abc"映射的整数加一
 mp.insert(make_pair("cd", 2));  // 插入一个键值对
+mp.insert({"cd", 2});  // 插入一个键值对
+mp.size();
+mp.empty();
+mp.clear();
+mp.erase("cd");  // 清除键为 "cd" 的键值对
+mp["ab"];  // 返回"ab"的映射值
+mp.begin();
+mp.end();
+mp.find("ad");  // 返回第一个键值为"ad"的迭代器，不存在返回end
+mp.count("abc");  // 返回键值为"abc"的数量
+mp.lower_bound("abc");  // 返回第一个键值大于等于"abc"的元素的迭代器
+mp.upper_bound("abc");  // 返回第一个键值大于"abc"的元素的迭代器
+// 遍历
+// 使用迭代器遍历
+for (auto it = mp.begin(); it != mp.end(); ++it)
+    cout << (*it).first << " " << (*it).second << endl;
+// 使用auto遍历
+for (auto x : mp)
+    cout << x.first << " " << x.second << endl;
+// 使用扩展推断范围的遍历(c++17)
+for (auto &[k, v] : mp)
+    cout << k << " " << v << endl;
+```
+
+## set/multiset
+
+底层用的是红黑树。个人觉得set的功能完全被map包含，懒得写了
+
+## unordered_map/unordered_set
+
+unordered内部采用哈希表结构，插入的元素是无序的。增删查改均为O(1)的复杂度。因此也不支持lower_bound等函数   
+同时set仍然被map包含
+```c++
+// 定义
+unordered_map<int, int> mp;
+unordered_map<int, int> mp[N];
+// 函数
+mp.insert(make_pair(1, 2));
+mp.insert({3, 4});
+mp.size();
+mp.empty();
+mp.erase(3);
+mp.find(1);
+mp.count(1);
+mp.begin();
+mp.end();
+mp.clear();
+// 遍历
+for (auto it = mp.begin(); it != mp.end(); ++it)
+    cout << (*it).first << " " << (*it).second << endl;
+for (auto x : mp)
+    cout << x.first << " " << x.second << endl;
+for (auto &[k, v] : mp)
+    cout << k << " " << v << endl;
 ```
