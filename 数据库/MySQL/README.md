@@ -1,17 +1,5 @@
 # MySQL笔记
 
-## API
-
-包含头文件 #include <mysql.h>
-
-### 初始化
-
-* MYSQL *mysql_init(MYSQL *mysql);
-  * 初始化时参数指定 NULL，返回一个 MYSQL* 类型
- 
-### 连接到 mysql 服务器
-
-
 ## 配置环境
 
 ### Windows
@@ -48,3 +36,13 @@ default-character-set=utf8mb4
   * 复制一个 libmysql.dll 到项目文件下
   * 完成以上步骤，即可使用 mysql 文件
 
+
+## SQL语句
+
+### 数据定义语言DDL，定义数据库对象（数据库、表、字段）
+
+### 数据操作语言DML，对数据库表中的数据进行增删改
+
+### 数据查询语言DQL，查询数据库中表的记录
+
+### 数据控制语言DCL，用来创建数据库用户、控制数据库访问权限
