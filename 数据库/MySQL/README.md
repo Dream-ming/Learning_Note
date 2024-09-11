@@ -41,6 +41,29 @@ default-character-set=utf8mb4
 
 ### 数据定义语言DDL，定义数据库对象（数据库、表、字段）
 
+数据库操作：   
+* show databases;  // 查询所有的数据库
+* select database();  // 查询当前数据库
+* create database [if not exists] 数据库名 [default charset 字符规则如utf8mb4] [collate 排序规则];
+   * 创建数据库，中括号的内容可有可无 
+* drop database [if exists] 数据库名;  // 删除数据库
+* use 数据库名;  // 使用数据库
+
+表操作：   
+* show tables;  // 查询当前数据库所有表
+* desc 表名;  // 查询表内容
+* show create table 表名;  // 查询指定表的建表语句
+* create table 表名(字段1 类型 [comment 注释], 字段2 类型 [comment 注释]) [comment 表注释];
+   * 创建一张表
+   * 表内不同字段用逗号分开，最后一个字段切记不要加逗号
+   * 注释需要写comment关键字
+
+数据类型：
+* 数值类
+    * tinyint、smallint、mediumint、int、bigint，都是整数，分别占1、2、3、4、8个字节
+    * float、double，浮点数
+    * decimal， 
+
 ### 数据操作语言DML，对数据库表中的数据进行增删改
 
 ### 数据查询语言DQL，查询数据库中表的记录
