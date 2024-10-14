@@ -2,7 +2,7 @@
 
 ## 基础内容
 
-1、数据类型：
+### 1、数据类型：
 * 数值类
     * 在关键字后面加 unsigned 使用无符号类型
     * tinyint、smallint、mediumint、int、bigint: 都是整数，分别占1、2、3、4、8个字节
@@ -23,7 +23,7 @@
     * year: YYYY
     * datetime: YYYY-MM-DD HH:MM:SS
 
-2、聚合函数，将一列数据作为一个整体，进行纵向的计算
+### 2、聚合函数，将一列数据作为一个整体，进行纵向的计算
 * count 统计数量
 * max 最大值
 * min 最小值
@@ -200,7 +200,7 @@
 
 ## 函数
 
-1、字符串函数
+### 1、字符串函数
 
 * 拼接字符串
    * concat(s1, s2, ...)
@@ -219,7 +219,7 @@
    * 将用户的 uid 修改为五位数，不足的左边补零
       * update user set uid = lpad(uid, 5, '0');
     
-2、数值函数
+### 2、数值函数
 
 * 向上取整
    * ceil(x)
@@ -236,7 +236,7 @@
       * select lpad(round(round() * 1000000, 0), 6, '0');
 
     
-3、日期函数
+### 3、日期函数
 
 * 返回当前日期
    * curdate()
@@ -260,7 +260,7 @@
       * select uid, datediff(now(), entrydate) as 'entrydays' from user order by entrydays desc;
 
 
-4、流程控制函数
+### 4、流程控制函数
 
 * 如果 val 为 true 返回 t，否则返回 f
    * if(val, t, f)
@@ -277,7 +277,8 @@
 
 ## 约束
 
-1、常见的约束
+### 1、常见的约束
+
 * 主键       -   primary key
 * 自动增长   - auto_increment
 * 不为 null  - not null
@@ -297,4 +298,10 @@ create table user(
 # 在插入数据时，不指定gender，则会默认为'男'
 insert into user(name, age, gender) values ('tom', 12);
 # 当某一天插入失败（例如name重复），id仍然会被占用，插入下一条时，会跳过一个id
+```
+
+### 2、添加外键
+
+``` mysql
+
 ```
