@@ -1,8 +1,6 @@
 # MySQL笔记
 
-## SQL语句
-
-### 基础内容
+## 基础内容
 
 1、数据类型：
 * 数值类
@@ -32,6 +30,9 @@
 * avg 平均值
 * sum 求和
 
+
+## SQL语句
+
 ### 数据定义语言DDL，定义数据库对象（数据库、表、字段）
 
 1、数据库操作：   
@@ -45,6 +46,7 @@
     * drop database [if exists] 数据库名;
 * 使用数据库
     * use 数据库名;
+
 
 2、表操作：   
 * 查询当前数据库中所有的表
@@ -64,6 +66,7 @@
 * 删除表，并重新创建该表，相当于清空表操作
     * truncate table 表名;
 
+
 3、字段操作：
 * 添加字段
     * alter table 表名 add 字段名 类型(长度) [comment 注释] [约束];
@@ -73,6 +76,7 @@
     * alter table 表名 change 旧字段名 新字段名 类型(长度) [comment 注释] [约束];
 * 删除字段
     * alter table 表名 drop 字段名;
+
 
 ### 数据操作语言DML，对表中的数据进行增删改
 
@@ -196,11 +200,101 @@
 
 ## 函数
 
-### 字符串函数
+1、字符串函数
 
 * 拼接字符串
    * concat(s1, s2, ...)
 * 转换成小写，大写
    * lower(s)
    * upper(s)
-* 用字符串 pad 对 s 的左边进行填充
+* 用字符串 pad 对 s 的左边进行填充，达到 n 个字符为止
+   * lpad(s, n, pad)
+* 对右边填充，直到达到 n 个字符为止
+   * rpad(s, n, pad)
+* 去除字符串头部和尾部的空格
+   * trim(s)
+* 返回字符串从 start 开始 len 长的子字符串
+   * substring(s, start, len)
+* 例子
+   * 将用户的 uid 修改为五位数，不足的左边补零
+      * update user set uid = lpad(uid, 5, '0');
+    
+2、数值函数
+
+* 向上取整
+   * ceil(x)
+* 向下取整
+   * floor(x)
+* 返回 x / y 的模
+   * mod(x, y)
+* 返回 0 ~ 1 内的随机数
+   * rand()
+* 四舍五入，保留 y 位小数
+   * round(x, y)
+* 例子
+   * 生成一个六位数的随机验证码
+      * select lpad(round(round() * 1000000, 0), 6, '0');
+
+    
+3、日期函数
+
+* 返回当前日期
+   * curdate()
+* 返回当前时间
+   * curtime()
+* 返回当前日期和时间
+   * now()
+* 获取指定 date 的年份
+   * year(date)
+* 获取指定 date 的月份
+   * month(date)
+* 获取指定 date 的日期
+   * day(date)
+* 返回一个 日期/时间 值加上一个时间间隔 expr 后的时间值
+   * date_add(date, interval expr type)
+   * date_add(now(), interval 70 day)   // 当前时间往后 70 天的时间
+* 返回 起始时间data1 和 结束时间data2 之间的天数
+   * datediff(date1, date2)   // date1 - date2，如果时间一更早，会返回负数
+* 例子
+   * 查询用户注册天数，按注册天数倒序排序
+      * select uid, datediff(now(), entrydate) as 'entrydays' from user order by entrydays desc;
+
+
+4、流程控制函数
+
+* 如果 val 为 true 返回 t，否则返回 f
+   * if(val, t, f)
+* 如果 val1 不为空，返回 val1，否则返回 value2
+   * ifnull(val1, val2)
+* 如果 val1 为 true 返回 res1，否则返回 default，其中 when 和 then 可以写多个
+   * case when val1 then res1 ... else default end
+* 如果 expr 的值等于 val1，返回 res1，否则返回 default 默认值
+   * case expr when val1 then res1 ... else default end
+* 例子
+   * 查询用户的地址，如果是北京，显示'首都'，如果是上海，显示'魔都'，其他显示'其他
+      * select name, (case addr when '北京' then '首都' when '上海' then '魔都' else '其他' end) from user;
+    
+
+## 约束
+
+1、常见的约束
+* 主键       -   primary key
+* 自动增长   - auto_increment
+* 不为 null  - not null
+* 唯一       - unique
+* 检查条件    - check(条件)
+* 设置默认值  - default val
+
+* 例子
+   * 创建一张表，id 为主键自动增长，name 不为空且唯一，age 在[0, 120]之间，gender 默认为 '男'
+``` mysql
+create table user(
+    id int primary key auto_increment comment '主键',
+    name varchar(10) not null unique comment '姓名',
+    age int check( age > 0 && age <= 120) comment '年龄',
+    gender char(1) default '男' comment '性别'
+) comment '用户表';
+# 在插入数据时，不指定gender，则会默认为'男'
+insert into user(name, age, gender) values ('tom', 12);
+# 当某一天插入失败（例如name重复），id仍然会被占用，插入下一条时，会跳过一个id
+```
