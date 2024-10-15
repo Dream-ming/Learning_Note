@@ -300,8 +300,84 @@ insert into user(name, age, gender) values ('tom', 12);
 # 当某一天插入失败（例如name重复），id仍然会被占用，插入下一条时，会跳过一个id
 ```
 
-### 2、添加外键
+### 2、外键
 
+添加删除外键
 ``` mysql
-
+# 建表时添加外键
+create table 表名(
+    字段名 数据类型,
+    [constraint] [外键名称] foreign key (外键字段名) references 主表 (主表列名)
+);
+# 给表添加外键
+alter table 表名 add constraint 外键名称 foreign key (外键字段名) references 主表 (主表列名);
+# 删除外键
+alter table 表名 drop foreign key 外键名称;
 ```
+
+外键约束
+* no action - 当父表中有删除/更新时，先检查是否有外键，如果有则不允许操作
+* restrict - 同 no action
+* cascade(级联) - 当父表中有删除/更新时，将外键对应的子表中的记录也更新
+* set null - 当父表中有删除时，将子表的外键值修改为 null
+* set default - 父表有变更时，子表将外键列设置成一个默认值(Innodb不支持)
+* 添加外键约束
+   * alter table 表名 add constraint 外键名称 foreign key (外键字段名) references 主表名(主表字段) on update cascade on delete set null;
+
+
+## 多表查询
+
+### 1、内连接
+
+只返回满足条件的行，不满足条件的行不显示
+
+* 隐式内连接
+   * 语法：select 字段1 字段2 from 表1 表2 where 条件;
+   * 例：查询员工所在的部门，其中员工表记录了部门表的部门id
+      * select emp.name dept.name from emp, dept where emp.dept_id = dept.id;
+* 显示内连接
+   * 语法：select 字段1 字段2 from 表1 [inner] join 表2 on 条件;   // inner 可省略
+   * 例：select emp.name dept.name from emp [inner] join dept on emp.dept_id = dept.id;
+
+### 2、外连接
+
+会返回左表或右表的所有行，外加交集
+
+* 左连接
+   * 取左表+两表交集
+   * 语法：select 字段1 字段2 from 表1 left [outer] join 表2 on 条件;
+   * 例：查询员工的所有信息，以及所在部门
+      * select emp.* dept.id from emp left join dept on emp.dept_id = dept.id;
+* 右连接
+   * 取右表+两表交集
+   * 语法：select 字段1 字段2 from 表1 right [outer] join 表2 on 条件;
+   * 通常使用左连接
+
+### 3、自连接
+
+将同一张表连接两次，取出内容
+
+* 内连接
+   * 语法：select 字段1 字段2 from 表名 别名1 表名 别名2 where 条件
+   * 例：查询员工的领导名字，其中员工表中记录了自己的id，和领导的id
+      * select a.name, b.name from emp a , emp b where a.managerid = b.id;
+* 外连接
+   * 语法：select 字段1 字段2 from 表名 别名1 left join 表名 别名2 on 条件
+   * 例：上述查询，要求显示无领导的员工的内容
+      * select a.name, b.name from emp a left join emp b on a.managerid = b.id;
+    
+### 4、联合查询 union
+
+将多次查询的结果上下拼接，要求列相同
+
+* union all - 将查询结果全部拼在一起
+* union - 将结果去重
+* 例：查询用户为男，或者id小于100的用户的信息(若要去重，可以去掉关键字all，也可以直接一次查询条件解决)
+   * select * from user where gender = '男' union all select * from user where id < 100;
+ 
+### 5、子查询
+
+* 标量子查询
+* 列子查询
+* 行子查询
+* 表子查询
