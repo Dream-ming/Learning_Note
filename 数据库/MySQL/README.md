@@ -584,9 +584,16 @@ alter table 表名 drop foreign key 外键名称;
 
 当某一列有单列索引和联合索引时，数据库会优先使用联合索引。可以通过 SQL 提示来指定使用的索引
 
-* 推荐使用索引
+* 推荐使用索引 (use)
    * select * from 表名 use index(推荐使用的索引名) where 条件;
-* 不使用某索引
+* 不使用某索引 (ignore)
    * select * from 表名 ignore index(不使用的索引名) where 条件;
-* 强制使用索引
+* 强制使用索引 (force)
    * select * from 表名 force index(索引名) where 条件;    
+
+### 7、前缀索引
+
+当字段类型为字符串时，索引可能会很大，影响效率。可能只对一部分前缀建立索引
+
+* 语法
+   * create index idx_xxx on table_name(column(n));
