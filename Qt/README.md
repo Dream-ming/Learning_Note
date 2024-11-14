@@ -106,3 +106,27 @@
 * parent.cpp 和 son.cpp 中都包含 son.h
 * 即可相互调用内容
 
+### 3、Qt 自动格式化代码
+
+问题描述：公司规定的格式比较 crazy，两格空格tab，大括号不换行，代码间不留空行
+
+解决：
+
+* 下载 [美化器](https://sourceforge.net/projects/astyle/) 
+* 在 Qt Creator 的编辑 - preferences - 美化器中，艺术风格使用自定义风格，值导入下述配置
+
+````
+--style=attach
+indent=spaces=2	   # 缩进采用2个空格
+indent-switches         # -S  设置 switch 整体缩进
+indent-cases 	          # -K  设置 cases 整体缩进
+indent-namespaces       # -N  设置 namespace 整体缩进
+indent-preproc-block    # -xW 设置预处理模块缩进
+indent-preproc-define   # -w  设置宏定义模块缩进	
+pad-oper                # -p  操作符前后填充空格
+delete-empty-lines      # -xe 删除多余空行
+add-braces              # -j  单行语句加上大括号
+align-pointer=name      # *、&这类字符靠近变量名字
+#align-pointer=type       *、&这类字符靠近类型
+````
+
