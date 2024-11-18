@@ -32,7 +32,7 @@
 
 ## SQL语句
 
-### 数据定义语言DDL，定义数据库对象（数据库、表、字段）
+### 1、数据定义语言DDL，定义数据库对象（数据库、表、字段）
 
 1、数据库操作：   
 * 查询当前存在的数据库
@@ -77,7 +77,7 @@
     * alter table 表名 drop 字段名;
 
 
-### 数据操作语言DML，对表中的数据进行增删改
+### 2、数据操作语言DML，对表中的数据进行增删改
 
 1、添加数据(insert)    
 * 添加数据，只给几个字段赋值
@@ -92,13 +92,13 @@
 2、修改数据(update)    
 * 修改数据，中括号中的内容可以没有，如果不指定条件，则修改整张表的数据
    * update 表名 set 字段1 = 值1, 字段2 = 值2, ... [where 条件];
- 
+
 3、删除数据(delete)
 * 删除数据，如果不指定条件，会删除整张表
 * 无法删除某一个字段的内容，可以用update修改为null
    * delete from 表名 [where 条件];
 
-### 数据查询语言DQL，查询表中的记录
+### 3、数据查询语言DQL，查询表中的记录
 
 1、基本查询
 * 查询多个字段
@@ -151,6 +151,7 @@
    * 按照注册时间降序，年龄升序，给表排序
    * select * from user order by enterdata decs, age acs;
    
+
 5、分页查询
 * 基础语法
    * select 字段 from 表名 limit 起始索引, 查询记录数;
@@ -169,7 +170,7 @@
    * 先执行的取的别名可以给后执行的用，后执行的取的别名先执行的不能用
    * select 中取的别名给 where 用会报错
 
-### 数据控制语言DCL，用来创建数据库用户、控制数据库访问权限
+### 4、数据控制语言DCL，用来创建数据库用户、控制数据库访问权限
 
 1、查询用户
 * use mysql;   // 在 mysql 的系统表中查询
@@ -217,7 +218,7 @@
 * 例子
    * 将用户的 uid 修改为五位数，不足的左边补零
       * update user set uid = lpad(uid, 5, '0');
-    
+   
 ### 2、数值函数
 
 * 向上取整
@@ -373,7 +374,7 @@ alter table 表名 drop foreign key 外键名称;
    * 语法：select 字段1 字段2 from 表名 别名1 left join 表名 别名2 on 条件
    * 例：上述查询，要求显示无领导的员工的内容
       * select a.name, b.name from emp a left join emp b on a.managerid = b.id;
-    
+   
 ### 4、联合查询 union
 
 将多次查询的结果上下拼接，要求列相同
@@ -382,7 +383,7 @@ alter table 表名 drop foreign key 外键名称;
 * union - 将结果去重
 * 例：查询用户为男，或者id小于100的用户的信息(若要去重，可以去掉关键字all，也可以直接一次查询条件解决)
    * select * from user where gender = '男' union all select * from user where id < 100;
- 
+
 ### 5、子查询
 
 * 标量子查询
@@ -579,7 +580,7 @@ alter table 表名 drop foreign key 外键名称;
    * 用 or 链接查询的条件，如果有一个条件没有索引，则所有索引都失效
 * 数据分布影响
    * 如果 MySQL 评估，使用索引比全表慢，则不使用索引
- 
+
 ### 6、SQL 提示
 
 当某一列有单列索引和联合索引时，数据库会优先使用联合索引。可以通过 SQL 提示来指定使用的索引
@@ -597,3 +598,14 @@ alter table 表名 drop foreign key 外键名称;
 
 * 语法
    * create index idx_xxx on table_name(column(n));
+   * column(n) 表示对字段的前 n 位建立索引
+
+## SQL 优化
+
+### 1、插入优化
+
+* load 指令批量插入大数据
+  * mysql --local-infile -u root -p;       // 链接数据库的时候加上参数 --local-infile
+  * set global local_infile = 1;             // 开启从本地加载文件导入数据的参数
+  * load data local infile 'path' into table '表名' fields terminated by ',' lines terminated by '\n';
+    * 要载入的文件，字段之间用 ',' 分隔，行之间用 '\n' 分隔
