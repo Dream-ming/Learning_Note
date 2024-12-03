@@ -6,6 +6,9 @@
   * 修改文件后，添加文件
 * git commit -m '描述'
   * 给本次修改写描述
+* git commit -am '描述'
+  * 合并 add 和 commit
+
 * git reset --hard HEAD^
   * 回退一个版本
   * HEAD^^: 回退两个版本
@@ -45,9 +48,34 @@
 * git clone 仓库地址
   * 克隆仓库
   * git clone -b 分支名 仓库地址：指定分支克隆
- 
 * ssh-keygen -t rsa -C '邮箱'
   * 生成ssh密钥，创建在 ~/.ssh
+* 更新子模块
+  * 确认当前仓库的子模块是否需要更新，下面的命令会返回子模块当前的版本号
+    * git submodule status
+
+  * 进入子模块所在的目录
+    * cd 子模块
+
+  * 切换到子模块仓库对应的分支
+    * git checkout dev
+
+  * 拉取子模块的最新代码
+    * git pull
+
+  * 返回父仓库
+    * cd ..
+
+  * 更新子模块的引用
+    * git submodule update --remote
+
+* 回退子模块
+  * 与更新子模块类似
+  * 先进入子模块的文件目录
+  * 回退版本
+  * 回到父窗口
+  * 更新子模块
+
 
 ## Gitkraken的图形化界面
 
